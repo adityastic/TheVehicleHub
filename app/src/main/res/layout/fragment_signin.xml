@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.heinrichreimersoftware.materialintro.view.parallax.ParallaxLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_parallaxFactor="0.5"
+            android:src="@drawable/google_logo" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center"
+            app:layout_parallaxFactor="0.7"
+            android:layout_margin="20dp"
+            android:textColor="#000000"
+            android:text="Welcome, In Order to login please click the sign in button below"/>
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/login_with_google"
+            app:layout_parallaxFactor="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </com.heinrichreimersoftware.materialintro.view.parallax.ParallaxLinearLayout>
+</android.support.constraint.ConstraintLayout>

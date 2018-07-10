@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="aabdrrstvy.vehiclehub.activities.FleetActivity">
+    <item
+        android:icon="@drawable/toolbar_search"
+        android:title="Search"
+        android:id="@+id/search_toolbar"
+        app:showAsAction="ifRoom|collapseActionView" />
+</menu>
