@@ -1,44 +1,22 @@
 package aabdrrstvy.vehiclehub.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Typeface;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import androidx.appcompat.app.ActionBar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.logging.Handler;
 
 import aabdrrstvy.vehiclehub.R;
-import aabdrrstvy.vehiclehub.activities.SelectedFleetActivity;
 import aabdrrstvy.vehiclehub.datas.DrawerItemData;
-import aabdrrstvy.vehiclehub.datas.FleetInfo;
-import aabdrrstvy.vehiclehub.fragments.HomeFragment;
 import aabdrrstvy.vehiclehub.views.Drawer.AdityaNavigationLayout;
 
 /**
@@ -54,7 +32,7 @@ public class DrawerItemsAdapter extends RecyclerView.Adapter<DrawerItemsAdapter.
     ActionBar actionBar;
     int index = 0;
 
-    public DrawerItemsAdapter(Context context, List<DrawerItemData> list, AdityaNavigationLayout mainLayout, FragmentManager fragmentManager,ActionBar actionBar) {
+    public DrawerItemsAdapter(Context context, List<DrawerItemData> list, AdityaNavigationLayout mainLayout, FragmentManager fragmentManager, ActionBar actionBar) {
         this.context = context;
         this.list = list;
         this.mainLayout = mainLayout;
@@ -91,27 +69,23 @@ public class DrawerItemsAdapter extends RecyclerView.Adapter<DrawerItemsAdapter.
             }
         });
 
-        if(data.actiontitle.equals("Tips"))
-        {
+        if (data.actiontitle.equals("Tips")) {
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
             params.topMargin = 56;
             holder.itemView.setLayoutParams(params);
         }
 
-        if(index == position)
-        {
+        if (index == position) {
             holder.icon.setColorFilter(ContextCompat.getColor(context, R.color.colorAccent), android.graphics.PorterDuff.Mode.SRC_IN);
             holder.title.setTextColor(context.getResources().getColor(R.color.colorAccent));
-        }else
-        {
+        } else {
             holder.icon.setColorFilter(ContextCompat.getColor(context, R.color.drawer_default), android.graphics.PorterDuff.Mode.SRC_IN);
             holder.title.setTextColor(context.getResources().getColor(R.color.drawer_text_default));
         }
     }
 
 
-    public void changeFragment(Fragment fragment)
-    {
+    public void changeFragment(Fragment fragment) {
         fragmentManager.beginTransaction().replace(R.id.frag_container, fragment).addToBackStack(null).commit();
     }
 

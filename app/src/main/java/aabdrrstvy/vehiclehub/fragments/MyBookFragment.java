@@ -2,17 +2,17 @@ package aabdrrstvy.vehiclehub.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.Objects;
 
@@ -22,11 +22,14 @@ import aabdrrstvy.vehiclehub.utils.firebase.FirebaseHub;
 
 public class MyBookFragment extends Fragment {
 
-    private OnMyBookCalledListener mListener;
-
     SwipeRefreshLayout mSwipeRefreshLayout;
     RecyclerView mRecyclerView;
     MyBookingsAdapter mAdapter;
+    private OnMyBookCalledListener mListener;
+
+    public static Fragment newInstance() {
+        return new MyBookFragment();
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -64,7 +67,6 @@ public class MyBookFragment extends Fragment {
         });
     }
 
-
     public void refreshLayout() {
         mSwipeRefreshLayout.setRefreshing(true);
         mAdapter = null;
@@ -85,18 +87,14 @@ public class MyBookFragment extends Fragment {
         });
     }
 
-    public static Fragment newInstance() {
-        return new MyBookFragment();
-    }
-
-    public interface OnMyBookCalledListener {
-        void OnMyBookCalled(String title);
-    }
-
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public interface OnMyBookCalledListener {
+        void OnMyBookCalled(String title);
     }
 
 }

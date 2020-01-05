@@ -5,15 +5,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,11 @@ public class OffersFragment extends Fragment {
     RecyclerView mDealsRecyclerView, mOffersRecyclerView;
     RecyclerView.Adapter mOffersAdapter, mDealsAdapter;
     List<Bitmap> list;
+    HeaderView headerView;
+
+    public static Fragment newInstance() {
+        return new OffersFragment();
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -46,8 +52,6 @@ public class OffersFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_offers, container, false);
     }
-
-    HeaderView headerView;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -84,18 +88,14 @@ public class OffersFragment extends Fragment {
         ((TextView) view.findViewById(R.id.deals_text)).setTypeface(tf);
     }
 
-    public static Fragment newInstance() {
-        return new OffersFragment();
-    }
-
-    public interface OnOfferCalledListener {
-        void OnOfferCalled(String subtitle);
-    }
-
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public interface OnOfferCalledListener {
+        void OnOfferCalled(String subtitle);
     }
 
 }

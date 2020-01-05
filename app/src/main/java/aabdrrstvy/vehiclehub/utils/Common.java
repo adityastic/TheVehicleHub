@@ -7,14 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 import aabdrrstvy.vehiclehub.datas.FleetInfo;
-
-import static android.preference.PreferenceManager.getDefaultSharedPreferencesName;
 
 public class Common {
     public static Bitmap drawableToBitmap(Drawable drawable) {
@@ -49,11 +46,9 @@ public class Common {
 
     public static int getListIndex(ArrayList<FleetInfo> list, String number) {
         int index = -1;
-        for ( int i = 0 ; i < list.size() ; i++)
-        {
+        for (int i = 0; i < list.size(); i++) {
             FleetInfo f = list.get(i);
-            if(f.getNumber().equalsIgnoreCase(number))
-            {
+            if (f.getNumber().equalsIgnoreCase(number)) {
                 index = i;
                 break;
             }

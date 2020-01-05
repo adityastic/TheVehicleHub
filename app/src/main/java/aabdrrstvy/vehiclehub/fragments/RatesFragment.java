@@ -2,18 +2,23 @@ package aabdrrstvy.vehiclehub.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import aabdrrstvy.vehiclehub.R;
 
 public class RatesFragment extends Fragment {
 
     private OnRatesCalledListener mListener;
+
+    public static Fragment newInstance() {
+        return new RatesFragment();
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -38,18 +43,14 @@ public class RatesFragment extends Fragment {
         mListener.OnRatesCalled("");
     }
 
-    public static Fragment newInstance() {
-        return new RatesFragment();
-    }
-
-    public interface OnRatesCalledListener {
-        void OnRatesCalled(String title);
-    }
-
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public interface OnRatesCalledListener {
+        void OnRatesCalled(String title);
     }
 
 }

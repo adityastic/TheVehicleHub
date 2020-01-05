@@ -1,16 +1,9 @@
 package aabdrrstvy.vehiclehub.adapter;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,32 +11,26 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import aabdrrstvy.vehiclehub.R;
 import aabdrrstvy.vehiclehub.activities.FleetActivity;
-import aabdrrstvy.vehiclehub.activities.SelectedFleetActivity;
-import aabdrrstvy.vehiclehub.datas.Booking;
 import aabdrrstvy.vehiclehub.datas.FleetInfo;
-import aabdrrstvy.vehiclehub.datas.Profile;
-import aabdrrstvy.vehiclehub.utils.Common;
 import aabdrrstvy.vehiclehub.utils.firebase.FirebaseHub;
 
 /**
@@ -52,9 +39,9 @@ import aabdrrstvy.vehiclehub.utils.firebase.FirebaseHub;
 
 public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.FleetViewHolder> {
 
+    private static int lastPosition = -1;
     private Context context;
     private List<FleetInfo> list;
-    private static int lastPosition = -1;
     private FleetActivity fleetActivity;
 
     private Calendar startJourney, endJourney;
@@ -65,6 +52,20 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.FleetViewHol
         this.startJourney = startJourney;
         this.endJourney = endJourney;
         this.fleetActivity = fleetActivity;
+    }
+
+    private static void setRecyclerViewAnimation(Context context,
+                                                 View view, int position) {
+        Animation animation = AnimationUtils.loadAnimation(context, (position > lastPosition) ? R.anim.slide_from_bottom
+                : R.anim.slide_from_top);
+        view.startAnimation(animation);
+        lastPosition = position;
+    }
+
+    private static void setViewAnimation(Context context,
+                                         View view) {
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.right_from_left);
+        view.startAnimation(animation);
     }
 
     public void setStartJourney(Calendar startJourney) {
@@ -86,20 +87,6 @@ public class FleetAdapter extends RecyclerView.Adapter<FleetAdapter.FleetViewHol
     public void onViewDetachedFromWindow(@NonNull FleetViewHolder holder) {
         super.onViewDetachedFromWindow(holder);
         holder.itemView.clearAnimation();
-    }
-
-    private static void setRecyclerViewAnimation(Context context,
-                                                 View view, int position) {
-        Animation animation = AnimationUtils.loadAnimation(context, (position > lastPosition) ? R.anim.slide_from_bottom
-                : R.anim.slide_from_top);
-        view.startAnimation(animation);
-        lastPosition = position;
-    }
-
-    private static void setViewAnimation(Context context,
-                                         View view) {
-        Animation animation = AnimationUtils.loadAnimation(context, R.anim.right_from_left);
-        view.startAnimation(animation);
     }
 
     @SuppressLint("SetTextI18n")

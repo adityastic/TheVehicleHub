@@ -1,7 +1,5 @@
 package aabdrrstvy.vehiclehub.datas;
 
-import java.util.Date;
-
 public class FleetInfo {
 
     String BrandModel, VUrl, number;

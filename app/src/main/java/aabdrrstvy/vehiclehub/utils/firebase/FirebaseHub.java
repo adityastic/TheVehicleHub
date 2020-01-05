@@ -1,7 +1,6 @@
 package aabdrrstvy.vehiclehub.utils.firebase;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,9 +28,12 @@ import aabdrrstvy.vehiclehub.utils.Common;
 public class FirebaseHub {
     public static FirebaseAuth firebaseAuth;
     public static FirebaseUser currentUser;
-
+    public static ArrayList<FleetInfo> fleetlist;
+    public static ArrayList<FleetInfo> bookinglist;
     private static DatabaseReference profileDataBase;
     private static Profile profile;
+    private static int count = 0;
+    private static ArrayList<String> numbers;
 
     public static boolean checkFirebaseUser() {
         return currentUser != null;
@@ -59,9 +61,6 @@ public class FirebaseHub {
             }
         });
     }
-
-    public static ArrayList<FleetInfo> fleetlist;
-    private static int count = 0;
 
     public static void getFleetDetails(final Calendar start, final Calendar end, final onCompleteLoad onCompleteLoad) {
         fleetlist = new ArrayList<>();
@@ -159,9 +158,6 @@ public class FirebaseHub {
         profileDataBase.child(FirebaseHub.currentUser.getUid()).child("MyBookings").child(profileDataBase.push().getKey()).setValue(new SimpleDateFormat("dd-MM-yyyy").format(startJourney.getTime()) + "|" + key + "|" + number);
     }
 
-    public static ArrayList<FleetInfo> bookinglist;
-    private static ArrayList<String> numbers;
-
     public static void getMyBookings(final onCompleteLoad onCompleteLoad) {
         bookinglist = new ArrayList<>();
         numbers = new ArrayList<>();
@@ -200,8 +196,7 @@ public class FirebaseHub {
                                             int rate_ex = Integer.parseInt(str.nextToken());
                                             int rate_late = Integer.parseInt(str.nextToken());
 
-                                            for(int i=0;i<numbersBooked;i++)
-                                            {
+                                            for (int i = 0; i < numbersBooked; i++) {
                                                 bookinglist.add(new FleetInfo(
                                                         fleetinfo != null ? fleetinfo.get("BrandModel").toString() : null,
                                                         fleetinfo != null ? fleetinfo.get("VUrl").toString() : null,

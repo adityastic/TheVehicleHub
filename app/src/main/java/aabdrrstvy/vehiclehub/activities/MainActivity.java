@@ -1,13 +1,14 @@
 package aabdrrstvy.vehiclehub.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,14 +37,12 @@ public class MainActivity extends AppCompatActivity implements OffersFragment.On
 
     @Override
     public void onBackPressed() {
-        if(drawer.isDrawerOpen())
-        {
+        if (drawer.isDrawerOpen()) {
             drawer.closeDrawer();
-        }else
-        {
-            if(backflag){
+        } else {
+            if (backflag) {
                 finishAffinity();
-            }else {
+            } else {
                 backflag = true;
                 Toast.makeText(this, "Press Back Again to Exit App", Toast.LENGTH_SHORT).show();
             }
@@ -58,13 +57,13 @@ public class MainActivity extends AppCompatActivity implements OffersFragment.On
         mAdapter = null;
 
         list = new ArrayList<>();
-        list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_homepage)), "Book","Book", HomeFragment.newInstance()));
-        list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_offers)), "Offers","Offers", OffersFragment.newInstance()));
-        list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_mybookings)), "MyBookings","My Bookings", MyBookFragment.newInstance()));
-        list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_tips)), "Tips","Tips", MyBookFragment.newInstance()));
+        list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_homepage)), "Book", "Book", HomeFragment.newInstance()));
+        list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_offers)), "Offers", "Offers", OffersFragment.newInstance()));
+        list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_mybookings)), "MyBookings", "My Bookings", MyBookFragment.newInstance()));
+        list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_tips)), "Tips", "Tips", MyBookFragment.newInstance()));
 
         mRecyclerView.setAdapter(null);
-        mAdapter = new DrawerItemsAdapter(this, list , (AdityaNavigationLayout) findViewById(R.id.drawer), getSupportFragmentManager(),getSupportActionBar());
+        mAdapter = new DrawerItemsAdapter(this, list, (AdityaNavigationLayout) findViewById(R.id.drawer), getSupportFragmentManager(), getSupportActionBar());
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -73,12 +72,12 @@ public class MainActivity extends AppCompatActivity implements OffersFragment.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         mRecyclerView = findViewById(R.id.list);
-        drawer = (AdityaNavigationLayout) findViewById(R.id.drawer);
+        drawer = findViewById(R.id.drawer);
 
-        ((TextView)findViewById(R.id.name)).setText(FirebaseHub.currentUser.getDisplayName());
-        ((TextView)findViewById(R.id.email)).setText(FirebaseHub.currentUser.getEmail());
+        ((TextView) findViewById(R.id.name)).setText(FirebaseHub.currentUser.getDisplayName());
+        ((TextView) findViewById(R.id.email)).setText(FirebaseHub.currentUser.getEmail());
 
         //createDrawer();
 

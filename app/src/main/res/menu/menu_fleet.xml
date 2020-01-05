@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="aabdrrstvy.vehiclehub.activities.FleetActivity">
     <item
+        android:id="@+id/search_toolbar"
         android:icon="@drawable/toolbar_search"
         android:title="Search"
-        android:id="@+id/search_toolbar"
         app:showAsAction="ifRoom|collapseActionView" />
 </menu>

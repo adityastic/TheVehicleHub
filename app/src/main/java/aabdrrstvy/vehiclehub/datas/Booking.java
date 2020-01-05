@@ -1,11 +1,9 @@
 package aabdrrstvy.vehiclehub.datas;
 
-import java.util.Date;
-
 public class Booking {
-    String startDate,endDate;
+    String startDate, endDate;
     Double amount;
-    String ProId,Number;
+    String ProId, Number;
 
     public Booking(String startDate, String endDate, Double amount, String proId, String number) {
         this.startDate = startDate;

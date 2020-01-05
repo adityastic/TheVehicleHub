@@ -3,6 +3,15 @@ package aabdrrstvy.vehiclehub.datas;
 public class Profile {
     String fullName, email, phone;
 
+    public Profile() {
+    }
+
+    public Profile(String fullName, String email, String phone) {
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -13,13 +22,5 @@ public class Profile {
 
     public String getPhone() {
         return phone;
-    }
-    public Profile() {
-    }
-
-    public Profile(String fullName, String email, String phone) {
-        this.fullName = fullName;
-        this.email = email;
-        this.phone = phone;
     }
 }

@@ -1,12 +1,13 @@
 package aabdrrstvy.vehiclehub.datas;
 
 import android.graphics.Bitmap;
-import android.support.v4.app.Fragment;
+
+import androidx.fragment.app.Fragment;
 
 public class DrawerItemData {
 
     public Bitmap image;
-    public String title,actiontitle;
+    public String title, actiontitle;
     public Fragment fragment;
 
     public DrawerItemData(Bitmap image, String title, String actiontitle, Fragment fragment) {

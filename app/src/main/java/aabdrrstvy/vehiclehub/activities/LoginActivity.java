@@ -1,6 +1,5 @@
 package aabdrrstvy.vehiclehub.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.heinrichreimersoftware.materialintro.app.IntroActivity;
@@ -20,7 +19,7 @@ public class LoginActivity extends IntroActivity {
         setButtonBackVisible(false);
         setButtonNextVisible(false);
 
-        final Slide loginSlide,lastSlide;
+        final Slide loginSlide, lastSlide;
 
         addSlide(new SimpleSlide.Builder()
                 .background(R.color.colorPrimary)

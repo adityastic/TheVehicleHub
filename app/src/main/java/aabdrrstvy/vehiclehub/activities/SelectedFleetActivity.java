@@ -1,48 +1,20 @@
 package aabdrrstvy.vehiclehub.activities;
 
-import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.animation.LinearOutSlowInInterpolator;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.transition.Fade;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
-import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import aabdrrstvy.vehiclehub.R;
-import aabdrrstvy.vehiclehub.adapter.FleetAdapter;
-import aabdrrstvy.vehiclehub.datas.FleetInfo;
-import aabdrrstvy.vehiclehub.utils.datePicker.SublimePickerFragment;
-import aabdrrstvy.vehiclehub.utils.firebase.FirebaseHub;
 import aabdrrstvy.vehiclehub.utils.interpolator.CustomBounceInterpolator;
 
 public class SelectedFleetActivity extends AppCompatActivity {
@@ -50,6 +22,13 @@ public class SelectedFleetActivity extends AppCompatActivity {
     Toolbar toolbar;
     CardView cardView;
     ImageView curveRect;
+
+    public static void setViewAnimation(Context context,
+                                        View view) {
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_from_bottom);
+        view.startAnimation(animation);
+        view.setVisibility(View.VISIBLE);
+    }
 
     @Override
     public void onBackPressed() {
@@ -60,14 +39,6 @@ public class SelectedFleetActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }
-
-
-    public static void setViewAnimation(Context context,
-                                        View view) {
-        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_from_bottom);
-        view.startAnimation(animation);
-        view.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -102,9 +73,9 @@ public class SelectedFleetActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                setViewAnimation(SelectedFleetActivity.this,cardView);
+                setViewAnimation(SelectedFleetActivity.this, cardView);
             }
-        },400);
+        }, 400);
 
         //Animations
         Fade slide = new Fade();

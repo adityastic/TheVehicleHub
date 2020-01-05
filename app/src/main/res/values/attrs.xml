@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="card_background" format="color"/>
+    <attr name="card_background" format="color" />
     <declare-styleable name="HeaderView">
-        <attr name="widthRatio" format="integer"/>
-        <attr name="heightRatio" format="integer"/>
+        <attr name="widthRatio" format="integer" />
+        <attr name="heightRatio" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="SearchView">
-        <attr name="wRatio" format="integer"/>
-        <attr name="hRatio" format="integer"/>
+        <attr name="wRatio" format="integer" />
+        <attr name="hRatio" format="integer" />
     </declare-styleable>
 
 </resources>

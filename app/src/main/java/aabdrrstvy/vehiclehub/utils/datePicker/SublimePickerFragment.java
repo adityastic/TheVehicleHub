@@ -17,12 +17,12 @@
 package aabdrrstvy.vehiclehub.utils.datePicker;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 import com.appeaser.sublimepickerlibrary.SublimePicker;
 import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
@@ -51,7 +51,7 @@ public class SublimePickerFragment extends DialogFragment {
     SublimeListenerAdapter mListener = new SublimeListenerAdapter() {
         @Override
         public void onCancelled() {
-            if (mCallback!= null) {
+            if (mCallback != null) {
                 mCallback.onCancelled();
             }
 
@@ -109,7 +109,7 @@ public class SublimePickerFragment extends DialogFragment {
 
         options.setPickerToShow(SublimeOptions.Picker.DATE_PICKER);
         options.setAnimateLayoutChanges(true);
-        options.setDisplayOptions(SublimeOptions.ACTIVATE_DATE_PICKER|SublimeOptions.ACTIVATE_TIME_PICKER);
+        options.setDisplayOptions(SublimeOptions.ACTIVATE_DATE_PICKER | SublimeOptions.ACTIVATE_TIME_PICKER);
         options.setDateRange(new Date().getTime(), Long.MIN_VALUE);
 
         mSublimePicker.initializePicker(options, mListener);

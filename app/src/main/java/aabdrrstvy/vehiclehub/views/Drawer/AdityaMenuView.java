@@ -5,25 +5,21 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.LayoutRes;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import aabdrrstvy.vehiclehub.R;
 
@@ -340,23 +336,6 @@ public class AdityaMenuView extends RelativeLayout {
     }
 
     /**
-     * Holds the views in this menu
-     */
-    private class MenuViewHolder {
-        private LinearLayout mMenuOptions;
-        private ImageView mMenuBackground;
-        private ViewGroup mMenuHeader;
-        private ViewGroup mMenuFooter;
-
-        MenuViewHolder(ViewGroup rootView) {
-            this.mMenuOptions = (LinearLayout) rootView.findViewById(R.id.duo_view_menu_options_layout);
-            this.mMenuBackground = (ImageView) rootView.findViewById(R.id.duo_view_menu_background);
-            this.mMenuHeader = (ViewGroup) rootView.findViewById(R.id.duo_view_menu_header_layout);
-            this.mMenuFooter = (ViewGroup) rootView.findViewById(R.id.duo_view_menu_footer_layout);
-        }
-    }
-
-    /**
      * Listener that listens to menu click events.
      */
     public interface OnMenuClickListener {
@@ -375,5 +354,22 @@ public class AdityaMenuView extends RelativeLayout {
          * Will be called when user pressed an option view.
          */
         void onOptionClicked(int position, Object objectClicked);
+    }
+
+    /**
+     * Holds the views in this menu
+     */
+    private class MenuViewHolder {
+        private LinearLayout mMenuOptions;
+        private ImageView mMenuBackground;
+        private ViewGroup mMenuHeader;
+        private ViewGroup mMenuFooter;
+
+        MenuViewHolder(ViewGroup rootView) {
+            this.mMenuOptions = rootView.findViewById(R.id.duo_view_menu_options_layout);
+            this.mMenuBackground = rootView.findViewById(R.id.duo_view_menu_background);
+            this.mMenuHeader = rootView.findViewById(R.id.duo_view_menu_header_layout);
+            this.mMenuFooter = rootView.findViewById(R.id.duo_view_menu_footer_layout);
+        }
     }
 }

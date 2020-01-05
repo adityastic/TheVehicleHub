@@ -2,21 +2,13 @@ package aabdrrstvy.vehiclehub.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
 import aabdrrstvy.vehiclehub.R;
@@ -67,7 +59,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferViewHol
 
         public OfferViewHolder(View itemView) {
             super(itemView);
-            offer = (AppCompatImageView) itemView.findViewById(R.id.offer_image);
+            offer = itemView.findViewById(R.id.offer_image);
         }
 
     }

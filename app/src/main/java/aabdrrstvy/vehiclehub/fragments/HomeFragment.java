@@ -2,36 +2,27 @@ package aabdrrstvy.vehiclehub.fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatSpinner;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.TimeUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
@@ -39,15 +30,12 @@ import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicke
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import aabdrrstvy.vehiclehub.R;
 import aabdrrstvy.vehiclehub.activities.FleetActivity;
 import aabdrrstvy.vehiclehub.adapter.HintAdapter;
-import aabdrrstvy.vehiclehub.adapter.OfferAdapter;
 import aabdrrstvy.vehiclehub.utils.datePicker.SublimePickerFragment;
-import aabdrrstvy.vehiclehub.views.HeaderView;
 
 public class HomeFragment extends Fragment {
 
@@ -68,6 +56,10 @@ public class HomeFragment extends Fragment {
     Calendar startJourney, endJourney;
     String[] monthNames = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
     String[] hourNames = new String[]{"12", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"};
+
+    public static Fragment newInstance() {
+        return new HomeFragment();
+    }
 
     public void setStartDateTime(Calendar cal) {
         startJourney = cal;
@@ -254,31 +246,26 @@ public class HomeFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(spinner.getSelectedItemPosition() > 0)
-                {
+                if (spinner.getSelectedItemPosition() > 0) {
                     Intent i = new Intent(getContext(), FleetActivity.class);
-                    i.putExtra("startCal",startJourney.getTimeInMillis());
-                    i.putExtra("endCal",endJourney.getTimeInMillis());
+                    i.putExtra("startCal", startJourney.getTimeInMillis());
+                    i.putExtra("endCal", endJourney.getTimeInMillis());
                     startActivity(i);
-                    getActivity().overridePendingTransition(R.anim.slide_up,R.anim.stay);
-                }else
+                    getActivity().overridePendingTransition(R.anim.slide_up, R.anim.stay);
+                } else
                     Toast.makeText(getContext(), "Select Pickup", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    public static Fragment newInstance() {
-        return new HomeFragment();
-    }
-
-    public interface OnHomeCalledListener {
-        void onHomesCalled(String subtitle);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public interface OnHomeCalledListener {
+        void onHomesCalled(String subtitle);
     }
 
 }

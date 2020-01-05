@@ -1,15 +1,15 @@
-
 package aabdrrstvy.vehiclehub.fragments.splashscreen;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -34,6 +34,14 @@ public class LoginFragment extends SlideFragment {
     private GoogleSignInClient mGoogleSignInClient;
     private boolean loggedIn = false;
 
+    public LoginFragment() {
+        // Required empty public constructor
+    }
+
+    public static LoginFragment newInstance() {
+        return new LoginFragment();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,14 +61,6 @@ public class LoginFragment extends SlideFragment {
     @Override
     public boolean canGoBackward() {
         return loggedIn;
-    }
-
-    public LoginFragment() {
-        // Required empty public constructor
-    }
-
-    public static LoginFragment newInstance() {
-        return new LoginFragment();
     }
 
     @Override

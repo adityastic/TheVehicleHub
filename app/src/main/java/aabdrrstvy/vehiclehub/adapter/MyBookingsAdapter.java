@@ -3,10 +3,6 @@ package aabdrrstvy.vehiclehub.adapter;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +10,11 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,26 +34,13 @@ import aabdrrstvy.vehiclehub.datas.FleetInfo;
 
 public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.FleetViewHolder> {
 
+    private static int lastPosition = -1;
     private Context context;
     private List<FleetInfo> list;
-    private static int lastPosition = -1;
 
     public MyBookingsAdapter(Context context, List<FleetInfo> list) {
         this.list = list;
         this.context = context;
-    }
-
-    @NonNull
-    @Override
-    public FleetViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_book_item, parent, false);
-        return new FleetViewHolder(v);
-    }
-
-    @Override
-    public void onViewDetachedFromWindow(@NonNull FleetViewHolder holder) {
-        super.onViewDetachedFromWindow(holder);
-        holder.itemView.clearAnimation();
     }
 
     private static void setRecyclerViewAnimation(Context context,
@@ -67,6 +55,19 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.Fl
                                          View view) {
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.right_from_left);
         view.startAnimation(animation);
+    }
+
+    @NonNull
+    @Override
+    public FleetViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_book_item, parent, false);
+        return new FleetViewHolder(v);
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(@NonNull FleetViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+        holder.itemView.clearAnimation();
     }
 
     @Override

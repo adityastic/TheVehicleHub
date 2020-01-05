@@ -1,10 +1,10 @@
 package aabdrrstvy.vehiclehub.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -20,16 +20,15 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //SHARED PREFS
-        Common.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean("grid",true).apply();
+        Common.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean("grid", true).apply();
 
         FirebaseHub.firebaseAuth = FirebaseAuth.getInstance();
         FirebaseHub.currentUser = FirebaseHub.firebaseAuth.getCurrentUser();
 
-        if (!FirebaseHub.checkFirebaseUser()){
+        if (!FirebaseHub.checkFirebaseUser()) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivityForResult(intent, REQUEST_CODE_INTRO);
-        }
-        else {
+        } else {
             FirebaseHub.updateProfile();
             startActivity(new Intent(SplashScreen.this, MainActivity.class));
         }

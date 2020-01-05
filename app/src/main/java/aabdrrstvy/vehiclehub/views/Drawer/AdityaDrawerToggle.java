@@ -11,22 +11,24 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.annotation.StringRes;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.graphics.drawable.DrawerArrowDrawable;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
-import static android.support.v4.widget.DrawerLayout.DrawerListener;
-import static android.support.v4.widget.DrawerLayout.OnClickListener;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.annotation.StringRes;
+import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import static androidx.drawerlayout.widget.DrawerLayout.DrawerListener;
+import static androidx.drawerlayout.widget.DrawerLayout.OnClickListener;
 
 /**
  * This class provides a handy way to tie together the functionality of
- * {@link android.support.v4.widget.DrawerLayout} and the framework <code>ActionBar</code> to
+ * {@link DrawerLayout} and the framework <code>ActionBar</code> to
  * implement the recommended design for navigation drawers.
  * <p>
  * <p>To use <code>AdityaDrawerToggle</code>, create one in your Activity and call through
@@ -50,78 +52,28 @@ import static android.support.v4.widget.DrawerLayout.OnClickListener;
  * <p>
  * <p>
  * You can customize the the animated toggle by defining the
- * {@link android.support.v7.appcompat.R.styleable#DrawerArrowToggle drawerArrowStyle} in your
+ * {@link androidx.appcompat.appcompat.R.styleable#DrawerArrowToggle drawerArrowStyle} in your
  * ActionBar theme.
  */
 public class AdityaDrawerToggle implements DrawerListener {
 
-    /**
-     * Allows an implementing Activity to return an {@link Delegate} to use
-     * with AdityaDrawerToggle.
-     */
-    public interface DelegateProvider {
-
-        /**
-         * @return Delegate to use for ActionBarDrawableToggles, or null if the Activity
-         * does not wish to override the default behavior.
-         */
-        @Nullable
-        Delegate getDrawerToggleDelegate();
-    }
-
-    public interface Delegate {
-
-        /**
-         * Set the Action Bar's up indicator drawable and content description.
-         *
-         * @param upDrawable     - Drawable to set as up indicator
-         * @param contentDescRes - Content description to set
-         */
-        void setActionBarUpIndicator(Drawable upDrawable, @StringRes int contentDescRes);
-
-        /**
-         * Set the Action Bar's up indicator content description.
-         *
-         * @param contentDescRes - Content description to set
-         */
-        void setActionBarDescription(@StringRes int contentDescRes);
-
-        /**
-         * Returns the drawable to be set as up button when DrawerToggle is disabled
-         */
-        Drawable getThemeUpIndicator();
-
-        /**
-         * Returns the context of ActionBar
-         */
-        Context getActionBarThemedContext();
-
-        /**
-         * Returns whether navigation icon is visible or not.
-         * Used to print warning messages in case developer forgets to set displayHomeAsUp to true
-         */
-        boolean isNavigationVisible();
-    }
-
     private final Delegate mActivityImpl;
     private final AdityaNavigationLayout mAdityaNavigationLayout;
-
+    private final int mOpenDrawerContentDescRes;
+    private final int mCloseDrawerContentDescRes;
     private DrawerToggle mSlider;
     private Drawable mHomeAsUpIndicator;
     private boolean mDrawerIndicatorEnabled = true;
     private boolean mHasCustomUpIndicator;
-    private final int mOpenDrawerContentDescRes;
-    private final int mCloseDrawerContentDescRes;
     // used in toolbar mode when DrawerToggle is disabled
     private OnClickListener mToolbarNavigationClickListener;
     // If developer does not set displayHomeAsUp, DrawerToggle won't show up.
     // DrawerToggle logs a warning if this case is detected
     private boolean mWarnedForDisplayHomeAsUp = false;
-
     /**
      * Construct a new AdityaDrawerToggle.
      * <p>
-     * <p>The given {@link Activity} will be linked to the specified {@link android.support.v4.widget.DrawerLayout} and
+     * <p>The given {@link Activity} will be linked to the specified {@link DrawerLayout} and
      * its Actionbar's Up button will be set to a custom drawable.
      * <p>This drawable shows a Hamburger icon when drawer is closed and an arrow when drawer
      * is open. It animates between these two states as the drawer opens.</p>
@@ -130,23 +82,22 @@ public class AdityaDrawerToggle implements DrawerListener {
      * accessibility services.</p>
      *
      * @param activity                  The Activity hosting the drawer. Should have an ActionBar.
-     * @param AdityaNavigationLayout           The DrawerLayout to link to the given Activity's ActionBar
+     * @param AdityaNavigationLayout    The DrawerLayout to link to the given Activity's ActionBar
      * @param openDrawerContentDescRes  A String resource to describe the "open drawer" action
      *                                  for accessibility
      * @param closeDrawerContentDescRes A String resource to describe the "close drawer" action
      *                                  for accessibility
      */
     public AdityaDrawerToggle(Activity activity, AdityaNavigationLayout AdityaNavigationLayout,
-                           @StringRes int openDrawerContentDescRes,
-                           @StringRes int closeDrawerContentDescRes) {
+                              @StringRes int openDrawerContentDescRes,
+                              @StringRes int closeDrawerContentDescRes) {
         this(activity, null, AdityaNavigationLayout, null, openDrawerContentDescRes,
                 closeDrawerContentDescRes);
     }
-
     /**
      * Construct a new AdityaDrawerToggle with a Toolbar.
      * <p>
-     * The given {@link Activity} will be linked to the specified {@link android.support.v4.widget.DrawerLayout} and
+     * The given {@link Activity} will be linked to the specified {@link DrawerLayout} and
      * the Toolbar's navigation icon will be set to a custom drawable. Using this constructor
      * will set Toolbar's navigation click listener to toggle the drawer when it is clicked.
      * <p>
@@ -161,23 +112,23 @@ public class AdityaDrawerToggle implements DrawerListener {
      *
      * @param activity                  The Activity hosting the drawer.
      * @param toolbar                   The toolbar to use if you have an independent Toolbar.
-     * @param AdityaNavigationLayout           The DrawerLayout to link to the given Activity's ActionBar
+     * @param AdityaNavigationLayout    The DrawerLayout to link to the given Activity's ActionBar
      * @param openDrawerContentDescRes  A String resource to describe the "open drawer" action
      *                                  for accessibility
      * @param closeDrawerContentDescRes A String resource to describe the "close drawer" action
      *                                  for accessibility
      */
     public AdityaDrawerToggle(Activity activity, AdityaNavigationLayout AdityaNavigationLayout,
-                           Toolbar toolbar, @StringRes int openDrawerContentDescRes,
-                           @StringRes int closeDrawerContentDescRes) {
+                              Toolbar toolbar, @StringRes int openDrawerContentDescRes,
+                              @StringRes int closeDrawerContentDescRes) {
         this(activity, toolbar, AdityaNavigationLayout, null, openDrawerContentDescRes,
                 closeDrawerContentDescRes);
     }
 
     <T extends Drawable & DrawerToggle> AdityaDrawerToggle(Activity activity, Toolbar toolbar,
-                                                        AdityaNavigationLayout AdityaNavigationLayout, T slider,
-                                                        @StringRes int openDrawerContentDescRes,
-                                                        @StringRes int closeDrawerContentDescRes) {
+                                                           AdityaNavigationLayout AdityaNavigationLayout, T slider,
+                                                           @StringRes int openDrawerContentDescRes,
+                                                           @StringRes int closeDrawerContentDescRes) {
         if (toolbar != null) {
             mActivityImpl = new ToolbarCompatDelegate(toolbar);
             toolbar.setNavigationOnClickListener(new OnClickListener() {
@@ -351,7 +302,6 @@ public class AdityaDrawerToggle implements DrawerListener {
         }
     }
 
-
     /**
      * {@link DrawerListener} callback method. If you do not use your
      * AdityaDrawerToggle instance directly as your DrawerLayout's listener, you should call
@@ -451,12 +401,74 @@ public class AdityaDrawerToggle implements DrawerListener {
         return mActivityImpl.getThemeUpIndicator();
     }
 
+    /**
+     * Allows an implementing Activity to return an {@link Delegate} to use
+     * with AdityaDrawerToggle.
+     */
+    public interface DelegateProvider {
+
+        /**
+         * @return Delegate to use for ActionBarDrawableToggles, or null if the Activity
+         * does not wish to override the default behavior.
+         */
+        @Nullable
+        Delegate getDrawerToggleDelegate();
+    }
+
+    public interface Delegate {
+
+        /**
+         * Set the Action Bar's up indicator drawable and content description.
+         *
+         * @param upDrawable     - Drawable to set as up indicator
+         * @param contentDescRes - Content description to set
+         */
+        void setActionBarUpIndicator(Drawable upDrawable, @StringRes int contentDescRes);
+
+        /**
+         * Set the Action Bar's up indicator content description.
+         *
+         * @param contentDescRes - Content description to set
+         */
+        void setActionBarDescription(@StringRes int contentDescRes);
+
+        /**
+         * Returns the drawable to be set as up button when DrawerToggle is disabled
+         */
+        Drawable getThemeUpIndicator();
+
+        /**
+         * Returns the context of ActionBar
+         */
+        Context getActionBarThemedContext();
+
+        /**
+         * Returns whether navigation icon is visible or not.
+         * Used to print warning messages in case developer forgets to set displayHomeAsUp to true
+         */
+        boolean isNavigationVisible();
+    }
+
+    /**
+     * Interface for toggle drawables. Can be public in the future
+     */
+    interface DrawerToggle {
+
+        float getPosition();
+
+        void setPosition(float position);
+    }
+
     static class DrawerArrowDrawableToggle extends DrawerArrowDrawable implements DrawerToggle {
         private final Activity mActivity;
 
         public DrawerArrowDrawableToggle(Activity activity, Context themedContext) {
             super(themedContext);
             mActivity = activity;
+        }
+
+        public float getPosition() {
+            return getProgress();
         }
 
         public void setPosition(float position) {
@@ -467,20 +479,6 @@ public class AdityaDrawerToggle implements DrawerListener {
             }
             setProgress(position);
         }
-
-        public float getPosition() {
-            return getProgress();
-        }
-    }
-
-    /**
-     * Interface for toggle drawables. Can be public in the future
-     */
-    static interface DrawerToggle {
-
-        public void setPosition(float position);
-
-        public float getPosition();
     }
 
     /**

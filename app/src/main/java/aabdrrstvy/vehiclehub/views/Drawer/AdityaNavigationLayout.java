@@ -7,12 +7,6 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.IntDef;
-import android.support.annotation.LayoutRes;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.ViewDragHelper;
-import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -22,13 +16,19 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.IntDef;
+import androidx.annotation.LayoutRes;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MotionEventCompat;
+import androidx.core.view.ViewCompat;
+import androidx.customview.widget.ViewDragHelper;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-
 import aabdrrstvy.vehiclehub.R;
 
-import static android.support.v4.widget.DrawerLayout.DrawerListener;
+import static androidx.drawerlayout.widget.DrawerLayout.DrawerListener;
 
 
 public class AdityaNavigationLayout extends RelativeLayout {
@@ -720,6 +720,22 @@ public class AdityaNavigationLayout extends RelativeLayout {
         mDrawerListener = drawerListener;
     }
 
+    /**
+     * @hide
+     */
+    @IntDef({STATE_IDLE, STATE_DRAGGING, STATE_SETTLING})
+    @Retention(RetentionPolicy.SOURCE)
+    private @interface State {
+    }
+
+    /**
+     * @hide
+     */
+    @IntDef({LOCK_MODE_UNLOCKED, LOCK_MODE_LOCKED_CLOSED, LOCK_MODE_LOCKED_OPEN})
+    @Retention(RetentionPolicy.SOURCE)
+    private @interface LockMode {
+    }
+
     private class ViewDragCallback extends ViewDragHelper.Callback {
         boolean mIsEdgeDrag = false;
 
@@ -849,21 +865,5 @@ public class AdityaNavigationLayout extends RelativeLayout {
             }
             return result;
         }
-    }
-
-    /**
-     * @hide
-     */
-    @IntDef({STATE_IDLE, STATE_DRAGGING, STATE_SETTLING})
-    @Retention(RetentionPolicy.SOURCE)
-    private @interface State {
-    }
-
-    /**
-     * @hide
-     */
-    @IntDef({LOCK_MODE_UNLOCKED, LOCK_MODE_LOCKED_CLOSED, LOCK_MODE_LOCKED_OPEN})
-    @Retention(RetentionPolicy.SOURCE)
-    private @interface LockMode {
     }
 }
