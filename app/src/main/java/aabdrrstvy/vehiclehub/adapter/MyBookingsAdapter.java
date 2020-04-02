@@ -84,7 +84,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.Fl
         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Picasso.with(context).load(uri).centerCrop().fit().into(holder.fleet_image, new Callback() {
+                Picasso.get().load(uri).centerCrop().fit().into(holder.fleet_image, new Callback() {
                     @Override
                     public void onSuccess() {
                         setViewAnimation(context, holder.fleet_image);
@@ -92,7 +92,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.Fl
                     }
 
                     @Override
-                    public void onError() {
+                    public void onError(Exception e) {
 
                     }
                 });

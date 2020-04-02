@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "aabdrrstvy.vehiclehub"
         minSdkVersion 21
@@ -35,7 +35,7 @@ dependencies {
     implementation 'com.heinrichreimersoftware:material-intro:2.0.0'
 
     // Image caching libraries
-    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     // Material DatePicker
     implementation 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.2'
