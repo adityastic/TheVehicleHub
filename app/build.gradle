@@ -42,7 +42,7 @@ dependencies {
 
     // Firebase Libraries
     implementation 'com.google.firebase:firebase-auth:19.3.0'
-    implementation 'com.google.firebase:firebase-database:19.2.1'
+    implementation 'com.google.firebase:firebase-database:19.3.0'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.firebaseui:firebase-ui-storage:6.2.1'
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
