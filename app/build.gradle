@@ -39,7 +39,7 @@ dependencies {
     implementation 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.2'
 
     // Firebase Libraries
-    implementation 'com.google.firebase:firebase-auth:19.4.0'
+    implementation 'com.google.firebase:firebase-auth:20.0.0'
     implementation 'com.google.firebase:firebase-database:19.5.1'
     implementation 'com.google.firebase:firebase-storage:19.2.0'
     implementation 'com.firebaseui:firebase-ui-storage:6.3.0'
